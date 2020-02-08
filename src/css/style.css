@@ -1,0 +1,126 @@
+* {
+	text-align: center;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	background: rgb(30, 144, 255);
+	background: linear-gradient(90deg, rgba(30, 144, 255, 1) 0%, rgba(191, 191, 191, 1) 50%, rgba(168, 44, 44, 1) 100%);
+	/* background: rgb(0, 0, 0);
+	background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(88, 88, 88, 1) 46%, rgba(208, 208, 208, 1) 100%); */
+}
+
+.game-status {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	margin: 0 auto;
+	width: 400px;
+	transition: all .3s;
+}
+
+.board {
+	border-radius: 5px;
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 30px 30px;
+	width: 700px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+h1 {
+	font-size: 5em;
+	color: white;
+	/* background: rgb(30, 144, 255);
+	background: linear-gradient(90deg, rgba(30, 144, 255, 1) 0%, rgba(191, 191, 191, 1) 50%, rgba(168, 44, 44, 1) 100%); */
+	/* background-clip: text;
+	-webkit-text-fill-color: transparent; */
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	margin-bottom: 5px;
+}
+
+h2 {
+	color: white;
+	text-shadow: -.5px -.5px 0 #000, .5px -.5px 0 #000, -.5px .5px 0 #000, .5px .5px 0 #000;
+}
+
+h3 {
+	font-size: 3em;
+}
+
+table {
+	margin: 0 auto;
+}
+
+td {
+	border: 2px solid black;
+	border-radius: 5px;
+	height: 100px;
+	width: 100px;
+}
+
+.red {
+	background-color: rgb(168, 44, 44);
+
+	animation: fadeIn .8s linear;
+}
+
+.blue {
+	background-color: dodgerblue;
+
+	animation: fadeIn .8s linear;
+}
+
+.col-hover {
+	border-left: 4px solid orange;
+	border-right: 4px solid orange;
+}
+
+.game-btn {
+	font-size: 2em;
+	color: white;
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 10px 20px;
+	margin: 20px auto;
+	background-color: orange;
+	cursor: pointer;
+
+	transition: all .5s;
+}
+.game-btn:hover {
+	color: black;
+	background-color: rgba(255, 166, 0, 0.8);
+}
+
+i {
+	color: orange;
+	font-size: 3em;
+	margin-top: 20px;
+	text-shadow: 1px 1px 1px black;
+}
+i:hover {
+	color: rgba(255, 166, 0, 0.65);
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@media all and (max-width: 750px) {
+	h1 {
+		font-size: 4em;
+	}
+	td {
+		height: 55px;
+		width: 55px;
+	}
+	.board {
+		width: 400px;
+	}
+}
