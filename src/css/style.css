@@ -6,6 +6,8 @@ body {
 	font-family: 'Odibee Sans', cursive, sans-serif;
 	color: #fff;
 	background-color: #000;
+
+	animation: fadeIn 1s linear;
 }
 
 .game-status {
@@ -127,6 +129,8 @@ i:hover {
 		width: 55px;
 	}
 	.board {
-		width: 400px;
+		width: 340px;
+		border-top-left-radius: 0%;
+		border-top-right-radius: 0%;
 	}
 }
