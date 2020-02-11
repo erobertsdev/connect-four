@@ -27,7 +27,7 @@ for (let square of board.squares) {
 					}
 					checkForWin(board.player, col);
 					if (!board.gameOver) {
-						changePlayer();
+						changePlayer(col);
 					}
 				} else {
 					board.boardArr[eval(`board.col${col}`).position][col] = 'red';
@@ -38,7 +38,7 @@ for (let square of board.squares) {
 					}
 					checkForWin(board.player, col);
 					if (!board.gameOver) {
-						changePlayer();
+						changePlayer(col);
 					}
 				}
 			} else {
@@ -102,9 +102,48 @@ const checkForWin = (player, column) => {
 			}
 		}
 	}
+	// Diagonal win checks
+	for (let x = 3; x < 5; x++) {
+		for (let y = 0; y < 4 - 3; y++) {
+			if (
+				board.boardArr[x][y] === player &&
+				board.boardArr[x - 1][y + 1] === player &&
+				board.boardArr[x - 2][y + 2] === player &&
+				board.boardArr[x - 3][y + 3] === player
+			) {
+				board.gameStatus.textContent = `${player} wins!`.toUpperCase();
+				board.gameOver = true;
+				board.gameButton.style.display = 'inherit';
+				board.gameButton.textContent = 'NEW GAME';
+				board.gameButton.addEventListener('click', () => {
+					location.reload();
+				});
+				return;
+			}
+		}
+	}
+	for (let x = 3; x < 5; x++) {
+		for (let y = 3; y < 4; y++) {
+			if (
+				board.boardArr[x][y] === player &&
+				board.boardArr[x - 1][y - 1] === player &&
+				board.boardArr[x - 2][y - 2] === player &&
+				board.boardArr[x - 3][y - 3] === player
+			) {
+				board.gameStatus.textContent = `${player} wins!`.toUpperCase();
+				board.gameOver = true;
+				board.gameButton.style.display = 'inherit';
+				board.gameButton.textContent = 'NEW GAME';
+				board.gameButton.addEventListener('click', () => {
+					location.reload();
+				});
+				return;
+			}
+		}
+	}
 };
 
-const changePlayer = () => {
+const changePlayer = (col) => {
 	if (board.player === 'blue') {
 		board.player = 'red';
 		board.gameStatus.textContent = `${board.player}'s Turn!`.toUpperCase();
