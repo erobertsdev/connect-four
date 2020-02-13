@@ -13,7 +13,6 @@ const init = (() => {
 
 for (let square of board.squares) {
 	square.addEventListener('click', () => {
-		let row = square.id.charAt(0);
 		let col = square.id.charAt(2);
 		if (!board.gameOver) {
 			// Checks if column is full
@@ -61,6 +60,16 @@ const columnGlow = (num) => {
 	cols.forEach((col) => col.classList.toggle('col-hover'));
 };
 
+const win = (player) => {
+	board.gameStatus.textContent = `${player} wins!`.toUpperCase();
+	board.gameOver = true;
+	board.gameButton.style.display = 'inherit';
+	board.gameButton.textContent = 'NEW GAME';
+	board.gameButton.addEventListener('click', () => {
+		location.reload();
+	});
+};
+
 const checkForWin = (player, column) => {
 	isBoardFull();
 	let count = 0;
@@ -69,13 +78,7 @@ const checkForWin = (player, column) => {
 		if (el === player) {
 			count++;
 			if (count === 4) {
-				board.gameStatus.textContent = `${player} wins!`.toUpperCase();
-				board.gameOver = true;
-				board.gameButton.style.display = 'inherit';
-				board.gameButton.textContent = 'NEW GAME';
-				board.gameButton.addEventListener('click', () => {
-					location.reload();
-				});
+				win(player);
 				return;
 			}
 		} else {
@@ -83,18 +86,12 @@ const checkForWin = (player, column) => {
 		}
 	});
 	// Checks for win horizontally
-	for (let i = 0; i <= 4; i++) {
-		for (let x = 0; x <= 5; x++) {
-			if (board.boardArr[i][x] === player) {
+	for (let x = 0; x <= 4; x++) {
+		for (let y = 0; y <= 5; y++) {
+			if (board.boardArr[x][y] === player) {
 				count++;
 				if (count === 4) {
-					board.gameStatus.textContent = `${player} wins!`.toUpperCase();
-					board.gameOver = true;
-					board.gameButton.style.display = 'inherit';
-					board.gameButton.textContent = 'NEW GAME';
-					board.gameButton.addEventListener('click', () => {
-						location.reload();
-					});
+					win(player);
 					return;
 				}
 			} else {
@@ -103,40 +100,122 @@ const checkForWin = (player, column) => {
 		}
 	}
 	// Diagonal win checks
-	for (let x = 3; x < 5; x++) {
-		for (let y = 0; y < 4 - 3; y++) {
+	for (let x = 0; x < 1; x++) {
+		for (let y = 3; y < 4; y++) {
 			if (
 				board.boardArr[x][y] === player &&
-				board.boardArr[x - 1][y + 1] === player &&
-				board.boardArr[x - 2][y + 2] === player &&
-				board.boardArr[x - 3][y + 3] === player
+				board.boardArr[x + 1][y - 1] === player &&
+				board.boardArr[x + 2][y - 2] === player &&
+				board.boardArr[x + 3][y - 3] === player
 			) {
-				board.gameStatus.textContent = `${player} wins!`.toUpperCase();
-				board.gameOver = true;
-				board.gameButton.style.display = 'inherit';
-				board.gameButton.textContent = 'NEW GAME';
-				board.gameButton.addEventListener('click', () => {
-					location.reload();
-				});
+				win(player);
 				return;
 			}
 		}
 	}
-	for (let x = 3; x < 5; x++) {
-		for (let y = 3; y < 4; y++) {
+	for (let x = 1; x < 2; x++) {
+		for (let y = 5; y < 6; y++) {
 			if (
 				board.boardArr[x][y] === player &&
-				board.boardArr[x - 1][y - 1] === player &&
-				board.boardArr[x - 2][y - 2] === player &&
-				board.boardArr[x - 3][y - 3] === player
+				board.boardArr[x + 1][y - 1] === player &&
+				board.boardArr[x + 2][y - 2] === player &&
+				board.boardArr[x + 3][y - 3] === player
 			) {
-				board.gameStatus.textContent = `${player} wins!`.toUpperCase();
-				board.gameOver = true;
-				board.gameButton.style.display = 'inherit';
-				board.gameButton.textContent = 'NEW GAME';
-				board.gameButton.addEventListener('click', () => {
-					location.reload();
-				});
+				win(player);
+				return;
+			}
+		}
+	}
+	for (let x = 1; x < 2; x++) {
+		for (let y = 0; y < 1; y++) {
+			if (
+				board.boardArr[x][y] === player &&
+				board.boardArr[x + 1][y + 1] === player &&
+				board.boardArr[x + 2][y + 2] === player &&
+				board.boardArr[x + 3][y + 3] === player
+			) {
+				win(player);
+				return;
+			}
+		}
+	}
+	for (let x = 0; x < 1; x++) {
+		for (let y = 2; y < 3; y++) {
+			if (
+				board.boardArr[x][y] === player &&
+				board.boardArr[x + 1][y + 1] === player &&
+				board.boardArr[x + 2][y + 2] === player &&
+				board.boardArr[x + 3][y + 3] === player
+			) {
+				win(player);
+				return;
+			}
+		}
+	}
+	for (let x = 4; x < 5; x++) {
+		for (let y = 4; y < 5; y++) {
+			board.boardArr[x][y] === player ? count++ : (count = 0);
+			board.boardArr[x - 1][y - 1] === player ? count++ : (count = 0);
+			board.boardArr[x - 2][y - 2] === player ? count++ : (count = 0);
+			board.boardArr[x - 3][y - 3] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
+				return;
+			}
+			board.boardArr[x - 4][y - 4] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
+				return;
+			}
+		}
+	}
+	for (let x = 4; x < 5; x++) {
+		for (let y = 5; y < 6; y++) {
+			board.boardArr[x][y] === player ? count++ : (count = 0);
+			board.boardArr[x - 1][y - 1] === player ? count++ : (count = 0);
+			board.boardArr[x - 2][y - 2] === player ? count++ : (count = 0);
+			board.boardArr[x - 3][y - 3] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
+				return;
+			}
+			board.boardArr[x - 4][y - 4] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
+				return;
+			}
+		}
+	}
+	for (let x = 4; x < 5; x++) {
+		for (let y = 0; y < 1; y++) {
+			board.boardArr[x][y] === player ? count++ : (count = 0);
+			board.boardArr[x - 1][y + 1] === player ? count++ : (count = 0);
+			board.boardArr[x - 2][y + 2] === player ? count++ : (count = 0);
+			board.boardArr[x - 3][y + 3] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
+				return;
+			}
+			board.boardArr[x - 4][y + 4] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
+				return;
+			}
+		}
+	}
+	for (let x = 4; x < 5; x++) {
+		for (let y = 1; y < 2; y++) {
+			board.boardArr[x][y] === player ? count++ : (count = 0);
+			board.boardArr[x - 1][y + 1] === player ? count++ : (count = 0);
+			board.boardArr[x - 2][y + 2] === player ? count++ : (count = 0);
+			board.boardArr[x - 3][y + 3] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
+				return;
+			}
+			board.boardArr[x - 4][y + 4] === player ? count++ : (count = 0);
+			if (count >= 4) {
+				win(player);
 				return;
 			}
 		}
