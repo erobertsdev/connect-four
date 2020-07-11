@@ -1,6 +1,6 @@
 import { board } from './views/board.js';
 
-const init = (() => {
+const initGame = () => {
 	board.gameButton.textContent = 'START';
 	board.gameButton.addEventListener('click', () => {
 		board.gameOver = false;
@@ -8,8 +8,9 @@ const init = (() => {
 		board.gameButton.style.display = 'none';
 		board.gameStatus.textContent = `${board.player}'s Turn!`.toUpperCase();
 		board.gameStatus.classList.add(`${board.player}`);
+		clearBoard();
 	});
-})();
+};
 
 for (let square of board.squares) {
 	square.addEventListener('click', () => {
@@ -236,6 +237,13 @@ const changePlayer = (col) => {
 	}
 };
 
+const clearBoard = () => {
+	for (let num = 0; num <= 5; num++) {
+		let cols = eval(`board.col${num}.dom`);
+		cols.forEach((col) => col.classList.remove('col-hover'));
+	}
+};
+
 const isBoardFull = () => {
 	let count = 0;
 	for (let i = 0; i <= 4; i++) {
@@ -256,3 +264,5 @@ const isBoardFull = () => {
 		}
 	}
 };
+
+initGame();
