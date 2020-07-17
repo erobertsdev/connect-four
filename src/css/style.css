@@ -5,7 +5,7 @@
 body {
 	font-family: 'Odibee Sans', cursive, sans-serif;
 	color: #fff;
-	background-image: url('/src/img/bg6.jpg');
+	background-image: url('../img/bg6.jpg');
 	background-repeat: repeat;
 	background-size: 400px 400px;
 
@@ -31,12 +31,7 @@ body {
 h1 {
 	font-size: 8em;
 	color: #fff;
-	background: -webkit-linear-gradient(
-		15deg,
-		rgba(30, 144, 255, 1) 30%,
-		rgb(167, 100, 100) 50%,
-		rgba(168, 44, 44, 1) 70%
-	);
+	background: -webkit-linear-gradient(15deg, #465c69 30%, rgb(156, 145, 126) 50%, #e27e5f 70%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	margin-bottom: 5px;
@@ -67,13 +62,13 @@ td {
 }
 
 .red {
-	background-color: rgb(168, 44, 44);
+	background-color: #e27e5f;
 
 	animation: fadeIn .8s linear;
 }
 
 .blue {
-	background-color: dodgerblue;
+	background-color: #465c69;
 
 	animation: fadeIn .8s linear;
 }
